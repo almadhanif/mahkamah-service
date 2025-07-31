@@ -1,0 +1,7 @@
+# .gitignore
+node_modules
+.env.*
+!.env.example
+storage/logs/*
+storage/uploads/*
+npm-debug.log
