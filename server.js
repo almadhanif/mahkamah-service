@@ -9,12 +9,6 @@ const PORT = process.env.PORT || 3001;
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Database connection has been established successfully.');
-
-    // Sinkronisasi model (opsional, lebih baik gunakan migrasi di produksi)
-    // await sequelize.sync({ alter: true });
-    // console.log('All models were synchronized successfully.');
-
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });

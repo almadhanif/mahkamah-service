@@ -1,0 +1,63 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Krakatau Service Express API",
+    "description": "Krakatau Service Express API Documentation"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5015",
+      "description": "Localhost Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Dashboard",
+      "description": "Everything about Dashboard",
+      "paths": "/dashboard"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user*/all": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "API-KEY"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": [],
+      "apiKeyAuth": []
+    }
+  ]
+}
