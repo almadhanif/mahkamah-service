@@ -10,6 +10,21 @@ router.post(
   /*
   #swagger.tags = ['Auth']
   #swagger.description = 'Endpoint to login user'
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            email: { type: 'string', format: 'email' },
+            password: { type: 'string', minLength: 6 }
+          },
+          required: ['email', 'password']
+        }
+      }
+    }
+  }
   */
   '/login',
   userLoginController
@@ -18,7 +33,7 @@ router.post(
 router.post(
   /*
   #swagger.tags = ['Auth']
-  #swagger.description = 'Endpoint to login user'
+  #swagger.description = 'Endpoint to register user'
   */
   '/register',
   userRegisterController
@@ -26,6 +41,7 @@ router.post(
 
 router.post(
   /*
+  #swagger.tags = ['Auth']
   #swagger.description = 'Endpoint to logout user'
   */
   '/logout',

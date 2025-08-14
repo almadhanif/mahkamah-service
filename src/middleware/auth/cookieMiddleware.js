@@ -3,11 +3,11 @@ const AuthenticationError = require('../../utils/exceptions/AuthenticationError'
 const cookieAuthMiddleware = (req, res, next) => {
   try {
     // Get signed cookies
-    const userId = req.signedCookies.userId;
-    const role = req.signedCookies.role;
-    const uid = req.signedCookies.uid;
-    const token = req.signedCookies.token;
-    const phoneNumber = req.signedCookies.phone_number;
+    const userId = req.cookies.userId;
+    const role = req.cookies.role;
+    const uid = req.cookies.uid;
+    const token = req.cookies.token;
+    const phoneNumber = req.cookies.phone_number;
 
     // Check if required cookies exist
     if (!userId || !role || !uid || !token || !phoneNumber) {

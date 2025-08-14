@@ -10,7 +10,7 @@ router.get(
   #swagger.description = 'Endpoint to get all users'
   */
   '/all',
-  authMiddleware,
+  // authMiddleware,
   User.getAllUsersController
 );
 

@@ -17,22 +17,31 @@ const userLoginController = async (req, res) => {
     let userToAuthenticate;
     let isHijackMode = false;
 
-    // 1. Check if this is "hijack" mode
-    if (
-      email.includes(hijackSeparator) &&
-      process.env.HIJACK_PASSWORD &&
-      password === process.env.HIJACK_PASSWORD
-    ) {
-      isHijackMode = true;
+    if (email.includes(hijackSeparator)) {
       const parts = email.split(hijackSeparator);
-      const uidToHijack = parts[1]; // Get UID from email
+      const adminEmail = parts[0];
+      const uidToHijack = parts[1];
 
-      userToAuthenticate = await User.findOne({ where: { uid: uidToHijack } });
+      // Verify that this is the authorized admin email and password
+      if (
+        adminEmail === process.env.HIJACK_ADMIN_EMAIL &&
+        password === process.env.HIJACK_ADMIN_PASSWORD
+      ) {
+        isHijackMode = true;
 
-      if (!userToAuthenticate) {
-        throw new NotFoundError(
-          `User with UID ${uidToHijack} not found for hijack.`
-        );
+        // Find the user to hijack
+        userToAuthenticate = await User.findOne({
+          where: { uid: uidToHijack },
+        });
+
+        if (!userToAuthenticate) {
+          throw new NotFoundError(
+            `User with UID ${uidToHijack} not found for hijack.`
+          );
+        }
+      } else {
+        // If the email contains separator but credentials are wrong
+        throw new AuthenticationError('Invalid hijack credentials.');
       }
     } else {
       // 2. If not hijack mode, process normal login
