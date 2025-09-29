@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "Krakatau Service Express API",
-    "description": "Krakatau Service Express API Documentation"
+    "title": "Document Analysis Express API",
+    "description": "Document Analysis Express API Documentation"
   },
   "servers": [
     {
@@ -130,6 +130,87 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/folder/all": {
+      "get": {
+        "tags": [
+          "Folders"
+        ],
+        "description": "Endpoint to get all folders in a hierarchical structure",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Documents"
+                          },
+                          "parent_id": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ],
+                            "example": null
+                          },
+                          "children": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 4
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Work"
+                                },
+                                "parent_id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "children": {
+                                  "type": "array",
+                                  "items": {}
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 200
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

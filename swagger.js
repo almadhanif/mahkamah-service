@@ -14,8 +14,8 @@ const swaggerAutogen = require('swagger-autogen')(options);
 const doc = {
   info: {
     version: '1.0.0',
-    title: 'Krakatau Service Express API',
-    description: 'Krakatau Service Express API Documentation',
+    title: 'Document Analysis Express API',
+    description: 'Document Analysis Express API Documentation',
   },
   servers: [
     {
