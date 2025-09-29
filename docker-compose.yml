@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  mysql:
+    image: mysql:8
+    container_name: mahkamah_agung
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3312:3306"
+    volumes:
+      - ./data/mahkamah_agung:/var/lib/mysql

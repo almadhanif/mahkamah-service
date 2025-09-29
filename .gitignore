@@ -1,4 +1,10 @@
 # .gitignore
+
+data/
+*.log
+*.pid
+*.sock
+dist/
 node_modules
 .env*
 !.env.example
