@@ -16,6 +16,7 @@ const swaggerOutputPath = './swagger-output.json';
 const IndexRoutes = require('./src/routes/v1/index.routes');
 const userLoginRoutes = require('./src/routes/v1/login.routes');
 const UserRoutes = require('./src/routes/v1/user.routes');
+const FolderRoutes = require('./src/routes/v1/folders.routes');
 
 // Generate swagger-output.json if it does not exist
 if (!fs.existsSync(swaggerOutputPath)) {
@@ -64,6 +65,7 @@ app.use('/', IndexRoutes);
 app.use('/auth', userLoginRoutes);
 
 app.use('/user', UserRoutes);
+app.use('/folder', FolderRoutes);
 
 app.use(function (req, res, next) {
   try {
