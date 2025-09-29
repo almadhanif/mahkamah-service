@@ -18,7 +18,7 @@ const getAllUserService = async ({}) => {
 
     return users;
   } catch (error) {
-    throw InternalServerError(error.message);
+    throw new InternalServerError(error.message);
   }
 };
 
