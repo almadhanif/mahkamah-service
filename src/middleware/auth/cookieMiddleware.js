@@ -7,10 +7,9 @@ const cookieAuthMiddleware = (req, res, next) => {
     const role = req.cookies.role;
     const uid = req.cookies.uid;
     const token = req.cookies.token;
-    const phoneNumber = req.cookies.phone_number;
 
     // Check if required cookies exist
-    if (!userId || !role || !uid || !token || !phoneNumber) {
+    if (!userId || !role || !uid || !token) {
       throw new AuthenticationError('Authentication required');
     }
 
@@ -19,7 +18,6 @@ const cookieAuthMiddleware = (req, res, next) => {
       userId,
       role,
       uid,
-      phoneNumber,
       token, // Include token if needed for further processing
     };
 

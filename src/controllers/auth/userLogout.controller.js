@@ -6,6 +6,7 @@ const userLogoutController = async (req, res) => {
     res.clearCookie('uid');
     res.clearCookie('token');
     res.clearCookie('phone_number');
+    res.clearCookie('name');
 
     return res.status(200).json({
       success: true,
