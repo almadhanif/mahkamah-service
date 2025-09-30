@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const getAllFoldersController = require('../../controllers/folders/getAllFolders.controller');
+const createFolderController = require('../../controllers/folders/createFolder.controller');
+const updateFolderController = require('../../controllers/folders/updateFolder.controller');
+const deleteFolderController = require('../../controllers/folders/deleteFolder.controller');
 
 //! Swagger documentation for foldering routes
 router.get(
@@ -50,14 +53,58 @@ router.get(
   getAllFoldersController
 );
 
-// router.post(
-//   /*
-//   #swagger.tags = ['Auth']
-//   #swagger.description = 'Endpoint to logout user'
-//   */
-//   '/',
-//   cookieAuthMiddleware,
-//   userLogoutController
-// );
+router.post(
+  '/add',
+  /*
+  #swagger.tags = ['Folders']
+  #swagger.description = 'Endpoint to create a new folder.'
+  #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'Folder details',
+    required: true,
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', example: 'New Project' },
+        parentId: { type: 'integer', example: 1, description: 'ID of the parent folder, null for root' }
+      }
+    }
+  }
+  */
+  createFolderController
+);
+
+// PUT (update) a folder name by ID
+router.put(
+  '/:id',
+  /*
+  #swagger.tags = ['Folders']
+  #swagger.description = 'Endpoint to update a folder name.'
+  #swagger.parameters['id'] = { description: 'Folder ID' }
+  #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'New folder name',
+    required: true,
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', example: 'Updated Project Name' }
+      }
+    }
+  }
+  */
+  updateFolderController
+);
+
+// DELETE a folder by ID
+router.delete(
+  '/:id',
+  /*
+  #swagger.tags = ['Folders']
+  #swagger.description = 'Endpoint to delete a folder.'
+  #swagger.parameters['id'] = { description: 'Folder ID' }
+  */
+  deleteFolderController
+);
 
 module.exports = router;
