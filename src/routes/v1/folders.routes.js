@@ -4,6 +4,8 @@ const getAllFoldersController = require('../../controllers/folders/getAllFolders
 const createFolderController = require('../../controllers/folders/createFolder.controller');
 const updateFolderController = require('../../controllers/folders/updateFolder.controller');
 const deleteFolderController = require('../../controllers/folders/deleteFolder.controller');
+const getFolderContentController = require('../../controllers/folders/getFolderContent.controller');
+const createFileBulkController = require('../../controllers/file/createFileBulk.controller');
 
 //! Swagger documentation for foldering routes
 router.get(
@@ -53,6 +55,16 @@ router.get(
   getAllFoldersController
 );
 
+router.get(
+  /*
+  #swagger.tags = ['Folders']
+  #swagger.description = 'Endpoint to get the content of a specific folder by ID'
+  #swagger.parameters['id'] = { description: 'Folder ID' }
+  */
+  '/:id',
+  getFolderContentController
+);
+
 router.post(
   '/add',
   /*
@@ -72,6 +84,33 @@ router.post(
   }
   */
   createFolderController
+);
+
+router.post(
+  '/:id/add-file/bulk',
+  /*
+  #swagger.tags = ['Folders']
+  #swagger.description = 'Endpoint to add multiple files to a spesific folder parent'
+  #swagger.parameters['id'] = { description: 'ID of the parent folder' }
+  #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'An array of file objects to upload.',
+    required: true,
+    schema: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', example: 'laporan-q3.pdf' },
+          file_data: { type: 'string', format: 'base64', example: 'JVBERi0xLjUNCi...' },
+          file_type: { type: 'string', example: 'application/pdf' },
+          file_size: { type: 'integer', example: 102400 }
+        }
+      }
+    }
+  }
+  */
+  createFileBulkController
 );
 
 // PUT (update) a folder name by ID
