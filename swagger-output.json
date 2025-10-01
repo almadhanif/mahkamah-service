@@ -215,62 +215,21 @@
         }
       }
     },
-    "/folder/add": {
-      "post": {
+    "/folder/{id}": {
+      "get": {
         "tags": [
           "Folders"
         ],
-        "description": "Endpoint to create a new folder.",
+        "description": "Endpoint to get the content of a specific folder by ID",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "description": "Folder details",
+            "name": "id",
+            "in": "path",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "object"
-                },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "New Project"
-                        }
-                      }
-                    },
-                    "parentId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "integer"
-                        },
-                        "example": {
-                          "type": "number",
-                          "example": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "example": "ID of the parent folder, null for root"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+              "type": "string"
+            },
+            "description": "Folder ID"
           }
         ],
         "responses": {
@@ -278,9 +237,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/folder/{id}": {
+      },
       "put": {
         "tags": [
           "Folders"
@@ -350,6 +307,180 @@
               "type": "string"
             },
             "description": "Folder ID"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/folder/add": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "description": "Endpoint to create a new folder.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Folder details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "New Project"
+                        }
+                      }
+                    },
+                    "parentId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "integer"
+                        },
+                        "example": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "ID of the parent folder, null for root"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/folder/{id}/add-file/bulk": {
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "description": "Endpoint to add multiple files to a spesific folder parent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the parent folder"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "An array of file objects to upload.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "object"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            },
+                            "example": {
+                              "type": "string",
+                              "example": "laporan-q3.pdf"
+                            }
+                          }
+                        },
+                        "file_data": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            },
+                            "format": {
+                              "type": "string",
+                              "example": "base64"
+                            },
+                            "example": {
+                              "type": "string",
+                              "example": "JVBERi0xLjUNCi..."
+                            }
+                          }
+                        },
+                        "file_type": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            },
+                            "example": {
+                              "type": "string",
+                              "example": "application/pdf"
+                            }
+                          }
+                        },
+                        "file_size": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "integer"
+                            },
+                            "example": {
+                              "type": "number",
+                              "example": 102400
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
